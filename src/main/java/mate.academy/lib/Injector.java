@@ -76,6 +76,7 @@ public class Injector {
             }
             return clazz;
         }
-        return interfaceClazz;
+        throw new RuntimeException("Class " + interfaceClazz.getName()
+                + " is not annotated with @Component");
     }
 }
