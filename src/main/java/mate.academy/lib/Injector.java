@@ -68,6 +68,9 @@ public class Injector {
     private Class<?> findImplementation(Class<?> interfaceClazz) {
         if (interfaceClazz != null && interfaceClazz.isInterface()) {
             Class<?> clazz = map.get(interfaceClazz);
+            if (clazz == null) {
+                throw new RuntimeException("Class is null");
+            }
             if (!clazz.isAnnotationPresent(Component.class)) {
                 throw new RuntimeException("Class " + clazz.getName()
                         + " is not annotated with @Component");
