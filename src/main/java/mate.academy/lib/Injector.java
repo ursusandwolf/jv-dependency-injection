@@ -37,7 +37,7 @@ public class Injector {
                     field.set(classImplementationInstance, fieldInstance);
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException("cannot init "
-                            + clazz.getName() + " field: " + field.getName());
+                            + clazz.getName() + " field: " + field.getName(), e);
                 }
             }
         }
@@ -60,7 +60,7 @@ public class Injector {
             return instance;
         } catch (NoSuchMethodException | InvocationTargetException
                  | IllegalAccessException | InstantiationException e) {
-            throw new RuntimeException("cannot create instance of " + clazz.getName());
+            throw new RuntimeException("cannot create instance of " + clazz.getName(), e);
         }
 
     }
