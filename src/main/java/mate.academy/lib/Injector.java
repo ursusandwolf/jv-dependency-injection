@@ -67,8 +67,14 @@ public class Injector {
         interfaceImplementations.put(FileReaderService.class, FileReaderServiceImpl.class);
         interfaceImplementations.put(ProductParser.class, ProductParserImpl.class);
         interfaceImplementations.put(ProductService.class, ProductServiceImpl.class);
+
         if (interfaceClazz.isInterface()) {
-            return interfaceImplementations.get(interfaceClazz);
+            Class<?> clazz = interfaceImplementations.get(interfaceClazz);
+            if (!clazz.isAnnotationPresent(Component.class)) {
+                throw new RuntimeException("Class " + clazz.getName()
+                        + " is not annotated with @Component");
+            }
+            return clazz;
         }
         return interfaceClazz;
     }
